@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router } from "react-router-dom";
+import AllRoutes from "./AllRoutes";
+import { useEffect } from "react";
+import { getUser } from "./redux/action/auth";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
+
+const dispatch = useDispatch()
+
+  const auth = useSelector(state => state.authReducer)
+  console.log(auth)
+
+ useEffect(() => {
+  dispatch(getUser());
+  console.log()
+ }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App bg-[#F5F5F5]">
+      
+      <Router>
+        <AllRoutes />
+      </Router>
+     
     </div>
   );
 }
